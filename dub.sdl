@@ -3,7 +3,9 @@ description "D bindings and binaries for libpsd"
 license "LGPL-2.1"
 copyright "Copyright (c) 2004-2007, www.graphest.com; Copyright (c) 2020, Sönke Ludwig"
 
+targetName "psd"
+
 sourceFiles "lib/windows-x86/psd.lib" platform="windows-x86"
 sourceFiles "lib/windows-x86_64/psd.lib" platform="windows-x86_64"
-sourceFiles "lib/linux-x86_64/libpsd.a" platform="linux-x86_64"
+libs ":${PACKAGE_DIR}/lib/linux-x86_64/libpsd.a" platform="linux-x86_64"
 sourceFiles "lib/macos-x86_64/libpsd.a" platform="osx-x86_64"
