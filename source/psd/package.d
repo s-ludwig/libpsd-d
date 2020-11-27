@@ -104,7 +104,8 @@ enum psd_load_tag {
 	layer,
 	merged,
 	thumbnail,
-	exif
+	metadata,
+	exif = metadata
 }
 
 // color mode
@@ -186,7 +187,11 @@ enum psd_blend_mode {
 	saturation,		// 'sat ' = saturation
 	color,			// 'colr' = color
 	luminosity,		// 'lum ' = luminosity
-	pass_through,			// 'pass' = pass
+	pass_through,	// 'pass' = pass
+	darker_color,	// 'dkCl' = darker color
+	lighter_color,	// 'lgCl' = lighter color
+	subtract,		// 'fsub' = subtract
+	divide,			// 'fdiv' = divide
 }
 
 // There are several types of layer information that have been added in Photoshop 4.0
@@ -1270,6 +1275,7 @@ psd_status psd_image_load_header(psd_context ** dst_context, psd_char * file_nam
 psd_status psd_image_load_layer(psd_context ** dst_context, psd_char * file_name);
 psd_status psd_image_load_merged(psd_context ** dst_context, psd_char * file_name);
 psd_status psd_image_load_thumbnail(psd_context ** dst_context, psd_char * file_name);
+psd_status psd_image_load_metadata(psd_context ** dst_context, psd_char * file_name);
 psd_status psd_image_load_exif(psd_context ** dst_context, psd_char * file_name);
 
 psd_status psd_image_load_stream(psd_context ** dst_context, psd_file_stream * stream);
@@ -1277,6 +1283,7 @@ psd_status psd_image_load_stream_header(psd_context ** dst_context, psd_file_str
 psd_status psd_image_load_stream_layer(psd_context ** dst_context, psd_file_stream * stream);
 psd_status psd_image_load_stream_merged(psd_context ** dst_context, psd_file_stream * stream);
 psd_status psd_image_load_stream_thumbnail(psd_context ** dst_context, psd_file_stream * stream);
+psd_status psd_image_load_stream_metadata(psd_context ** dst_context, psd_file_stream * stream);
 psd_status psd_image_load_stream_exif(psd_context ** dst_context, psd_file_stream * stream);
 
 psd_status psd_image_free(psd_context * context);
