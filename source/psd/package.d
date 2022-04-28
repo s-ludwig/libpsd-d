@@ -1235,6 +1235,10 @@ struct psd_context {
 	psd_uchar *					XMP_metadata;
 	psd_int						XMP_metadata_length;
 
+	psd_bool					fill_icc_data;
+	psd_uchar *					icc_data;
+	psd_int						icc_data_length;
+
 	psd_bool					fill_print_scale;
 	psd_print_scale				print_scale;
 
