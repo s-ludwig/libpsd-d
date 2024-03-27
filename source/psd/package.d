@@ -368,11 +368,11 @@ struct psd_grid_guides {
 // by a JFIF thumbnail in RGB (red, green, blue) order for both Macintosh and Windows.
 struct psd_thumbnail_resource {
 	psd_int						format;			// 1 = kJpegRGB . Also supports kRawRGB (0).
-	psd_int						width;			// Width of thumbnail in pixels.
-	psd_int						height;			// Height of thumbnail in pixels.
-	psd_int						width_bytes;	// Padded row bytes = (width * bits per pixel + 31) / 32 * 4.
-	psd_int						total_size;		// Total size = widthbytes * height * planes
-	psd_int						size_after_compression;// Used for consistency check.
+	psd_size					width;			// Width of thumbnail in pixels.
+	psd_size					height;			// Height of thumbnail in pixels.
+	psd_size					width_bytes;	// Padded row bytes = (width * bits per pixel + 31) / 32 * 4.
+	psd_size					total_size;		// Total size = widthbytes * height * planes
+	psd_size					size_after_compression;// Used for consistency check.
 	psd_short					bits_per_pixel;	// 24
 	psd_short					number_of_planes;// 1
 	psd_uchar *					jfif_data;
@@ -532,12 +532,12 @@ struct psd_channel_info {
 
 // Layer mask data. Can be 40 bytes, 24 bytes, or 4 bytes if no layer mask.
 struct psd_layer_mask_info {
-	psd_int						top;			// Rectangle enclosing layer mask: Top, left, bottom, right
-	psd_int						left;
-	psd_int						bottom;
-	psd_int						right;
-	psd_int						width;
-	psd_int						height;
+	psd_size					top;			// Rectangle enclosing layer mask: Top, left, bottom, right
+	psd_size					left;
+	psd_size					bottom;
+	psd_size					right;
+	psd_size					width;
+	psd_size					height;
 	psd_color_component			default_color;	// 0 or 255
 	psd_bool					relative;		// position relative to layer
 	psd_bool					disabled;		// layer mask disabled
@@ -569,12 +569,12 @@ struct psd_layer_vector_mask {
 // Information about each layer
 struct psd_layer_record {
 	psd_layer_type				layer_type;
-	psd_int						top;				// Rectangle containing the contents of the layer. Specified as top, left, bottom, right coordinates
-	psd_int						left;
-	psd_int						bottom;
-	psd_int						right;
-	psd_int						width;
-	psd_int						height;
+	psd_size					top;				// Rectangle containing the contents of the layer. Specified as top, left, bottom, right coordinates
+	psd_size					left;
+	psd_size					bottom;
+	psd_size					right;
+	psd_size					width;
+	psd_size					height;
 	psd_short					number_of_channels;	// Number of channels in the layer, including any alpha channels. Supported range is 1 to 56.
 	psd_channel_info *			channel_info;		//Channel information
 	psd_blend_mode				blend_mode;			// Blend mode key
@@ -1056,12 +1056,12 @@ struct psd_layer_effects {
 	psd_blend_mode[psd_layer_effects_image_count]	blend_mode;
 	psd_uchar[psd_layer_effects_image_count]	opacity;
 	psd_argb_color*[psd_layer_effects_image_count]	image_data;
-	psd_int[psd_layer_effects_image_count]	left;
-	psd_int[psd_layer_effects_image_count]	top;
-	psd_int[psd_layer_effects_image_count]	right;
-	psd_int[psd_layer_effects_image_count]	bottom;
-	psd_int[psd_layer_effects_image_count]	width;
-	psd_int[psd_layer_effects_image_count]	height;
+	psd_size[psd_layer_effects_image_count]	left;
+	psd_size[psd_layer_effects_image_count]	top;
+	psd_size[psd_layer_effects_image_count]	right;
+	psd_size[psd_layer_effects_image_count]	bottom;
+	psd_size[psd_layer_effects_image_count]	width;
+	psd_size[psd_layer_effects_image_count]	height;
 }
 
 
@@ -1164,8 +1164,8 @@ struct psd_context {
 	psd_load_tag				load_tag;
 
 	psd_ushort					version_;
-	psd_int						width;
-	psd_int						height;
+	psd_size					width;
+	psd_size					height;
 	psd_ushort					channels;
 	psd_ushort					depth;
 	psd_color_mode				color_mode;
@@ -1266,11 +1266,11 @@ struct psd_context {
 	// temporary data
 	psd_uchar *					rand_data;
 	psd_uchar *					temp_image_data;
-	long						temp_image_length;
+	psd_size					temp_image_length;
 	psd_uchar *					temp_channel_data;
-	long						temp_channel_length;
-	long						per_channel_length;
-	long						max_channel_length;
+	psd_size					temp_channel_length;
+	psd_size					per_channel_length;
+	psd_size					max_channel_length;
 }
 
 
@@ -1293,4 +1293,4 @@ psd_status psd_image_load_stream_exif(psd_context ** dst_context, psd_file_strea
 psd_status psd_image_free(psd_context * context);
 psd_status psd_adjustment_layer_update(psd_layer_record * layer);
 psd_status psd_layer_effects_update(psd_layer_record * layer, psd_layer_effects_type type);
-psd_status psd_image_blend(psd_context * context, psd_int left, psd_int top, psd_int width, psd_int height);
+psd_status psd_image_blend(psd_context * context, psd_size left, psd_size top, psd_size width, psd_size height);
