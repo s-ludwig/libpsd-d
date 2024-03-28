@@ -12,6 +12,7 @@ alias psd_short = short;
 alias psd_ushort = ushort;
 alias psd_int = int;
 alias psd_uint = uint;
+alias psd_size = sizediff_t;
 alias psd_float = float;
 alias psd_double = double;
 alias psd_color_component = ubyte;
