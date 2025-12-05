@@ -1223,9 +1223,13 @@ struct psd_context {
 	psd_bool					fill_url_list;
 	psd_url_list				url_list;
 	
-	psd_bool					fill_exif_data;
-	psd_uchar *					exif_data;
-	psd_int						exif_data_length;
+	psd_bool					fill_exif1_data;
+	psd_uchar *					exif1_data;
+	psd_int						exif1_data_length;
+
+	psd_bool					fill_exif3_data;
+	psd_uchar *					exif3_data;
+	psd_int						exif3_data_length;
 
 	psd_bool					fill_iptc_data;
 	psd_uchar *					iptc_data;
